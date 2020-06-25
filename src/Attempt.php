@@ -10,7 +10,7 @@ use Xwzvm\Attempt\Problem;
 /**
  * Wraps a callable.
  *
- * @author Sergei Malyshev
+ * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
 final class Attempt implements Proxy
 {
