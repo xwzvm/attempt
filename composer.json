@@ -1,0 +1,26 @@
+{
+    "name": "xwzvm/attempt",
+    "description": "Helps to make several attempts to invoke an unstable callable.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergei Malyshev",
+            "email": "xwzvm@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2",
+        "phpstan/phpstan": "^0.12.30",
+        "phpstan/phpstan-strict-rules": "^0.12.2"
+    },
+    "autoload": {
+        "psr-4": { "Xwzvm\\Attempt\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Xwzvm\\Attempt\\Test\\": "tests/" }
+    }
+}
