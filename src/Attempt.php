@@ -11,7 +11,7 @@ use Xwzvm\Attempt\Problem;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Attempt implements Proxy
+final class Attempt implements Repeater
 {
     /**
      * @var Problem\Resolver
