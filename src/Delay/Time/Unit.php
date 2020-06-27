@@ -29,7 +29,7 @@ abstract class Unit implements InMicroseconds
      */
     final public function __construct(float $amount)
     {
-        if ($amount < PHP_FLOAT_EPSILON) {
+        if ($amount < 0.) {
             throw new InvalidArgumentException('Argument $amount must be at least 0.');
         }
 
