@@ -12,9 +12,9 @@ use InvalidArgumentException;
 abstract class Unit implements InMicroseconds
 {
     /**
-     * @var int
+     * @var float
      */
-    private int $amount;
+    private float $amount;
 
     /**
      * Returns a number of microseconds in a time unit.
@@ -24,12 +24,12 @@ abstract class Unit implements InMicroseconds
     abstract protected function factor(): int;
 
     /**
-     * @param int $amount
+     * @param float $amount
      * @throws InvalidArgumentException if $amount < 0.
      */
-    final public function __construct(int $amount)
+    final public function __construct(float $amount)
     {
-        if ($amount < 0) {
+        if ($amount < PHP_FLOAT_EPSILON) {
             throw new InvalidArgumentException('Argument $amount must be at least 0.');
         }
 
@@ -39,7 +39,7 @@ abstract class Unit implements InMicroseconds
     /**
      * @inheritDoc
      */
-    final public function microseconds(): int
+    final public function microseconds(): float
     {
         return $this->amount * $this->factor();
     }

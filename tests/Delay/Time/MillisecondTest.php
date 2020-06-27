@@ -13,11 +13,11 @@ final class MillisecondTest extends TestCase
     private const MICROSECONDS_PER_MILLISECOND = 1000;
 
     /**
-     * @param int $amount
-     * @param int $expected
+     * @param float $amount
+     * @param float $expected
      * @dataProvider data
      */
-    public function testMicroseconds(int $amount, int $expected): void
+    public function testMicroseconds(float $amount, float $expected): void
     {
         $milliseconds = new Millisecond($amount);
 
@@ -32,7 +32,7 @@ final class MillisecondTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument $amount must be at least 0.');
 
-        new Millisecond(-1);
+        new Millisecond(-1.);
     }
 
     /**
@@ -43,7 +43,7 @@ final class MillisecondTest extends TestCase
         $data = [];
 
         for ($i = 0; $i < 3; ++$i) {
-            $amount = mt_rand(0, 100);
+            $amount = (float) mt_rand(0, 100);
             $data[] = [$amount, $amount * self::MICROSECONDS_PER_MILLISECOND];
         }
 

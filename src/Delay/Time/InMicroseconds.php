@@ -12,7 +12,7 @@ interface InMicroseconds
     /**
      * Returns a number of microseconds.
      *
-     * @return int
+     * @return float
      */
-    public function microseconds(): int;
+    public function microseconds(): float;
 }

@@ -11,11 +11,11 @@ use Xwzvm\Attempt\Delay\Time\Microsecond;
 final class MicrosecondTest extends TestCase
 {
     /**
-     * @param int $amount
-     * @param int $expected
+     * @param float $amount
+     * @param float $expected
      * @dataProvider data
      */
-    public function testMicroseconds(int $amount, int $expected): void
+    public function testMicroseconds(float $amount, float $expected): void
     {
         $microseconds = new Microsecond($amount);
 
@@ -30,7 +30,7 @@ final class MicrosecondTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument $amount must be at least 0.');
 
-        new Microsecond(-1);
+        new Microsecond(-1.);
     }
 
     /**
@@ -41,7 +41,7 @@ final class MicrosecondTest extends TestCase
         $data = [];
 
         for ($i = 0; $i < 3; ++$i) {
-            $amount = mt_rand(0, 100);
+            $amount = (float) mt_rand(0, 100);
             $data[] = [$amount, $amount];
         }
 
