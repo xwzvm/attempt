@@ -1,0 +1,30 @@
+language: php
+
+php:
+  - 7.4
+
+git:
+  quiet: true
+
+env:
+  - STATIC_ANALYSIS=true
+  - COVERAGE=true
+
+before_script:
+  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini; fi
+  - composer install --prefer-dist --quiet --no-interaction
+
+script:
+  - vendor/bin/phpunit
+  - |
+    if [[ $STATIC_ANALYSIS == true ]]; then
+      vendor/bin/phpstan analyse
+    fi
+
+after_script:
+  - |
+    if [[ $COVERAGE == true && $TRAVIS_BRANCH == "master" ]]; then
+      vendor/bin/phpunit --coverage-clover coverage.xml
+      wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
+      php php-coveralls.phar --verbose
+    fi
