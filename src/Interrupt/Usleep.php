@@ -6,7 +6,7 @@ use Xwzvm\Attempt\Delay\Time;
 
 /**
  * Delays using the usleep function.
- * Doesn't support delaying for more than PHP_INT_MAX microseconds.
+ * Doesn't delay for less than 1 or more than PHP_INT_MAX microseconds.
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  * @codeCoverageIgnore
@@ -33,7 +33,7 @@ final class Usleep implements Interrupt
     {
         $time = intval($this->delay->microseconds());
 
-        if ($time === 0) {
+        if ($time < 1) {
             return;
         }
 

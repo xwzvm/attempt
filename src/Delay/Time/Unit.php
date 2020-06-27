@@ -2,8 +2,6 @@
 
 namespace Xwzvm\Attempt\Delay\Time;
 
-use InvalidArgumentException;
-
 /**
  * Base class for time units.
  *
@@ -25,14 +23,9 @@ abstract class Unit implements InMicroseconds
 
     /**
      * @param float $amount
-     * @throws InvalidArgumentException if $amount < 0.
      */
     final public function __construct(float $amount)
     {
-        if ($amount < 0.) {
-            throw new InvalidArgumentException('Argument $amount must be at least 0.');
-        }
-
         $this->amount = $amount;
     }
 

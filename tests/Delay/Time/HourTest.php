@@ -25,17 +25,6 @@ final class HourTest extends TestCase
     }
 
     /**
-     * @return void
-     */
-    public function testNegativeAmount(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument $amount must be at least 0.');
-
-        new Hour(-1.);
-    }
-
-    /**
      * @return array[]
      */
     public function data(): array
