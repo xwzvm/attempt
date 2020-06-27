@@ -22,6 +22,11 @@ final class SieveTest extends TestCase
     {
         $sieve = new Problem\Sieve(...$acceptable);
 
+        $next = $this->createMock(Problem\Resolver::class);
+        $next->expects($this->exactly((int) $ok))->method('pass')->with($problem);
+
+        $this->assertEquals($next, $sieve->before($next));
+
         try {
             $sieve->pass($problem);
             $this->assertTrue($ok);

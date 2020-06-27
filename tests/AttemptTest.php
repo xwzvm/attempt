@@ -4,7 +4,6 @@ namespace Xwzvm\Attempt\Test;
 
 use PHPUnit\Framework\TestCase;
 use Xwzvm\Attempt\Attempt;
-use Xwzvm\Attempt\Interrupt\Interrupt;
 use Xwzvm\Attempt\Problem;
 
 /**
@@ -21,13 +20,10 @@ final class AttemptTest extends TestCase
      */
     public function testInvoke(callable $action, int $bound, array $arguments, int $expected): void
     {
-        $interrupt = $this->createMock(Interrupt::class);
-        $interrupt->expects($this->exactly($bound))->method('halt');
+        $resolver = $this->createMock(Problem\Resolver::class);
+        $resolver->expects($this->exactly($bound))->method('pass');
 
-        $sieve = $this->createMock(Problem\Resolver::class);
-        $sieve->expects($this->exactly($bound))->method('pass');
-
-        $attempt = new Attempt($interrupt, $sieve);
+        $attempt = new Attempt($resolver);
 
         $result = $attempt($action, $bound + 1)(...$arguments);
 
@@ -46,13 +42,10 @@ final class AttemptTest extends TestCase
 
         $times = mt_rand(1, $bound - 1);
 
-        $interrupt = $this->createMock(Interrupt::class);
-        $interrupt->expects($this->exactly($times))->method('halt');
+        $resolver = $this->createMock(Problem\Resolver::class);
+        $resolver->expects($this->exactly($times))->method('pass');
 
-        $sieve = $this->createMock(Problem\Resolver::class);
-        $sieve->expects($this->exactly($times))->method('pass');
-
-        $attempt = new Attempt($interrupt, $sieve);
+        $attempt = new Attempt($resolver);
 
         $attempt($action, $times)(...$arguments);
     }
@@ -65,13 +58,10 @@ final class AttemptTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument $times must be at least 1.');
 
-        $interrupt = $this->createMock(Interrupt::class);
-        $interrupt->expects($this->never())->method('halt');
+        $resolver = $this->createMock(Problem\Resolver::class);
+        $resolver->expects($this->never())->method('pass');
 
-        $sieve = $this->createMock(Problem\Resolver::class);
-        $sieve->expects($this->never())->method('pass');
-
-        $attempt = new Attempt($interrupt, $sieve);
+        $attempt = new Attempt($resolver);
 
         $attempt(function (): void {}, 0);
     }
@@ -87,13 +77,10 @@ final class AttemptTest extends TestCase
         /** @var class-string<\Throwable> $expected */
         $this->expectException($expected);
 
-        $interrupt = $this->createMock(Interrupt::class);
-        $interrupt->expects($this->exactly($times))->method('halt');
+        $resolver = $this->createMock(Problem\Resolver::class);
+        $resolver->expects($this->exactly($times))->method('pass');
 
-        $sieve = $this->createMock(Problem\Resolver::class);
-        $sieve->expects($this->exactly($times))->method('pass');
-
-        $attempt = new Attempt($interrupt, $sieve);
+        $attempt = new Attempt($resolver);
 
         $attempt($action, $times)();
     }

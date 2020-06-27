@@ -4,7 +4,6 @@ namespace Xwzvm\Attempt;
 
 use InvalidArgumentException;
 use Throwable;
-use Xwzvm\Attempt\Interrupt\Interrupt;
 use Xwzvm\Attempt\Problem;
 
 /**
@@ -15,23 +14,16 @@ use Xwzvm\Attempt\Problem;
 final class Attempt implements Proxy
 {
     /**
-     * @var Interrupt
-     */
-    private Interrupt $interrupt;
-
-    /**
      * @var Problem\Resolver
      */
-    private Problem\Resolver $sieve;
+    private Problem\Resolver $resolver;
 
     /**
-     * @param Interrupt $interrupt
-     * @param Problem\Resolver $sieve
+     * @param Problem\Resolver $resolver
      */
-    public function __construct(Interrupt $interrupt, Problem\Resolver $sieve)
+    public function __construct(Problem\Resolver $resolver)
     {
-        $this->interrupt = $interrupt;
-        $this->sieve = $sieve;
+        $this->resolver = $resolver;
     }
 
     /**
@@ -48,13 +40,11 @@ final class Attempt implements Proxy
                 try {
                     return call_user_func_array($action, $arguments);
                 } catch (Throwable $problem) {
-                    $this->sieve->pass($problem);
-                    $this->interrupt->halt();
+                    $this->resolver->pass($problem);
                 }
             } while (--$times > 0);
 
             throw $problem;
         };
-
     }
 }

@@ -20,11 +20,16 @@ use Xwzvm\Attempt\Delay\Time;
 use Xwzvm\Attempt\Interrupt;
 use Xwzvm\Attempt\Problem;
 
-$delay = new Time\Second(5);                    // Delay between attempts.
-$interrupt = new Interrupt\Usleep($delay);      // Interrupt implementation.
-$sieve = new Problem\Sieve(\Throwable::class);  // Represents acceptable \Throwable. May take several class-strings.
+// Acceptable \Throwable. May take several class-strings.
+$sieve = new Problem\Sieve(\Throwable::class);  
 
-$attempt = new Attempt($interrupt, $sieve);
+// Constant delay between attempts.
+$delay = new Problem\Delay(new Interrupt\Usleep(new Time\Second(5)));
+
+// \Throwable handling order.
+$sieve->before($delay);
+
+$attempt = new Attempt($sieve);
 
 $naughty = function (int $a, int $b): int {
     // A \Throwable may be thrown here.

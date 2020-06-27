@@ -18,6 +18,11 @@ final class Sieve implements Resolver
     private array $problems;
 
     /**
+     * @var Resolver
+     */
+    private Resolver $next;
+
+    /**
      * @param class-string<\Throwable> ...$acceptable
      * @throws InvalidArgumentException if $acceptable contains not \Throwable.
      */
@@ -30,19 +35,30 @@ final class Sieve implements Resolver
         }
 
         $this->problems = $acceptable;
+        $this->next = new Blank();
     }
 
     /**
      * @inheritDoc
+     * @throws Throwable
      */
     public function pass(Throwable $problem): void
     {
         foreach ($this->problems as $acceptable) {
             if (is_a($problem, $acceptable, true)) {
+                $this->next->pass($problem);
                 return;
             }
         }
 
         throw $problem;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function before(Resolver $next): Resolver
+    {
+        return $this->next = $next;
     }
 }
