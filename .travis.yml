@@ -6,14 +6,19 @@ php:
 git:
   quiet: true
 
-env:
-  - TEST=true
-  - STATIC_ANALYSIS=true
-  - COVERAGE=true
-  - CODE_STYLE=true
+jobs:
+  include:
+    - name: "Unit Test"
+      env: UNIT_TEST=true
+    - name: "Static Analysis"
+      env: STATIC_ANALYSIS=true
+    - name: "Code Coverage"
+      env: CODE_COVERAGE=true
+    - name: "Code Style"
+      env: CODE_STYLE=true
 
 before_script:
-  - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ $CODE_COVERAGE != true ]]; then phpenv config-rm xdebug.ini; fi
   - |
     if [[ $CODE_STYLE == true ]]; then
       composer global require friendsofphp/php-cs-fixer
@@ -22,13 +27,13 @@ before_script:
   - composer install --prefer-dist --quiet --no-interaction
 
 script:
-  - if [[ $TEST == true ]]; then vendor/bin/phpunit; fi
+  - if [[ $UNIT_TEST == true ]]; then vendor/bin/phpunit; fi
   - if [[ $STATIC_ANALYSIS == true ]]; then vendor/bin/phpstan analyse; fi
   - if [[ $CODE_STYLE == true ]]; then php-cs-fixer --diff --dry-run --verbose fix .; fi
 
 after_success:
   - |
-    if [[ $COVERAGE == true && $TRAVIS_BRANCH == "master" ]]; then
+    if [[ $CODE_COVERAGE == true && $TRAVIS_BRANCH == "master" ]]; then
       vendor/bin/phpunit --coverage-clover build/logs/clover.xml
       wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
       php php-coveralls.phar --verbose
