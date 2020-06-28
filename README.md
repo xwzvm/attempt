@@ -1,7 +1,10 @@
 # Attempt
 
+[![Latest Stable Version](https://poser.pugx.org/xwzvm/attempt/v)](//packagist.org/packages/xwzvm/attempt)
 [![Build Status](https://travis-ci.com/xwzvm/attempt.svg?branch=master)](https://travis-ci.com/xwzvm/attempt)
 [![Coverage Status](https://coveralls.io/repos/github/xwzvm/attempt/badge.svg?branch=master)](https://coveralls.io/github/xwzvm/attempt?branch=master)
+[![License](https://poser.pugx.org/xwzvm/attempt/license)](//packagist.org/packages/xwzvm/attempt)
+[![Total Downloads](https://poser.pugx.org/xwzvm/attempt/downloads)](//packagist.org/packages/xwzvm/attempt)
 
 **Attempt** is a flexible PHP library that makes repeated invocation of unstable callable less painful.
 
