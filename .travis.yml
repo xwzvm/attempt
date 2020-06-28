@@ -14,7 +14,11 @@ env:
 
 before_script:
   - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini; fi
-  - if [[ $CODE_STYLE == true ]]; then composer global require friendsofphp/php-cs-fixer; fi
+  - |
+    if [[ $CODE_STYLE == true ]]; then
+      composer global require friendsofphp/php-cs-fixer
+      export PATH="$PATH:$HOME/.composer/vendor/bin"
+    fi
   - composer install --prefer-dist --quiet --no-interaction
 
 script:
