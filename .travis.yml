@@ -19,17 +19,13 @@ jobs:
 
 before_script:
   - if [[ $CODE_COVERAGE != true ]]; then phpenv config-rm xdebug.ini; fi
-  - |
-    if [[ $CODE_STYLE == true ]]; then
-      composer global require friendsofphp/php-cs-fixer
-      export PATH="$PATH:$HOME/.composer/vendor/bin"
-    fi
   - composer install --prefer-dist --quiet --no-interaction
+  - if [[ $CODE_STYLE == true ]]; then composer require --dev friendsofphp/php-cs-fixer; fi
 
 script:
   - if [[ $UNIT_TEST == true ]]; then vendor/bin/phpunit; fi
   - if [[ $STATIC_ANALYSIS == true ]]; then vendor/bin/phpstan analyse; fi
-  - if [[ $CODE_STYLE == true ]]; then php-cs-fixer --diff --dry-run --verbose fix .; fi
+  - if [[ $CODE_STYLE == true ]]; then vendor/bin/php-cs-fixer --diff --dry-run --verbose fix .; fi
 
 after_success:
   - |
