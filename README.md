@@ -27,7 +27,7 @@ use Xwzvm\Attempt\Problem;
 $sieve = new Problem\Sieve(\Throwable::class);  
 
 // Constant delay between attempts.
-$delay = new Problem\Delay(new Interrupt\Usleep(new Time\Second(5)));
+$delay = new Problem\Delay(new Interrupt\BySleepFunction(new Time\Second(5), new Interrupt\Usleep()));
 
 // \Throwable handling order.
 $sieve->before($delay);
