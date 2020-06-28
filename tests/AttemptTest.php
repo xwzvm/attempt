@@ -63,7 +63,10 @@ final class AttemptTest extends TestCase
 
         $attempt = new Attempt($resolver);
 
-        $attempt(function (): void {}, 0);
+        $dummy = function (): void {
+        };
+
+        $attempt($dummy, 0);
     }
 
     /**

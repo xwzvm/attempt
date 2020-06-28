@@ -15,6 +15,5 @@ final class Blank implements Interrupt
      */
     public function halt(): void
     {
-
     }
 }

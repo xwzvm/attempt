@@ -7,19 +7,20 @@ git:
   quiet: true
 
 env:
+  - TEST=true
   - STATIC_ANALYSIS=true
   - COVERAGE=true
+  - CODE_STYLE=true
 
 before_script:
   - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ $CODE_STYLE == true ]]; then composer global require friendsofphp/php-cs-fixer; fi
   - composer install --prefer-dist --quiet --no-interaction
 
 script:
-  - vendor/bin/phpunit
-  - |
-    if [[ $STATIC_ANALYSIS == true ]]; then
-      vendor/bin/phpstan analyse
-    fi
+  - if [[ $TEST == true ]]; then vendor/bin/phpunit; fi
+  - if [[ $STATIC_ANALYSIS == true ]]; then vendor/bin/phpstan analyse; fi
+  - if [[ $CODE_STYLE == true ]]; then php-cs-fixer --diff --dry-run --verbose fix .; fi
 
 after_success:
   - |

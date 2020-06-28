@@ -15,7 +15,6 @@ final class Blank implements Resolver
      */
     public function pass(Throwable $problem): void
     {
-
     }
 
     /**
