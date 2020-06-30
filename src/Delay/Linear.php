@@ -13,9 +13,9 @@ use Xwzvm\Attempt\Delay\Time;
 final class Linear extends VariableDelay
 {
     /**
-     * @var int
+     * @var float
      */
-    private int $factor;
+    private float $factor;
 
     /**
      * @var Time\InMicroseconds
@@ -24,15 +24,11 @@ final class Linear extends VariableDelay
 
     /**
      * @param Time\InMicroseconds $time
-     * @param int $factor
+     * @param float $factor
      * @param Time\InMicroseconds $addition
      */
-    public function __construct(Time\InMicroseconds $time, int $factor = 1, Time\InMicroseconds $addition = null)
+    public function __construct(Time\InMicroseconds $time, float $factor = 1., Time\InMicroseconds $addition = null)
     {
-        if ($factor === 0) {
-            throw new InvalidArgumentException('Argument $factor cannot be 0.');
-        }
-
         parent::__construct($time);
 
         $this->factor = $factor;
@@ -44,11 +40,7 @@ final class Linear extends VariableDelay
      */
     protected function vary(): void
     {
-        $amount = $this->factor > 0
-            ? $this->time->microseconds() * $this->factor
-            : round($this->time->microseconds() / -$this->factor);
-
-        $amount += $this->addition->microseconds();
+        $amount = $this->time->microseconds() * $this->factor + $this->addition->microseconds();
 
         $this->time = new Time\Microsecond($amount);
     }
