@@ -29,8 +29,10 @@ final class Attempt implements Repeater
     /**
      * @inheritDoc
      */
-    public function __invoke(callable $action, int $times): callable
+    public function __invoke(callable $action, float $times): callable
     {
+        $times = round($times);
+
         if ($times < 1) {
             throw new InvalidArgumentException('Argument $times must be at least 1.');
         }
