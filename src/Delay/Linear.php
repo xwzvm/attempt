@@ -2,7 +2,6 @@
 
 namespace Xwzvm\Attempt\Delay;
 
-use InvalidArgumentException;
 use Xwzvm\Attempt\Delay\Time;
 
 /**
@@ -20,19 +19,19 @@ final class Linear extends VariableDelay
     /**
      * @var Time\InMicroseconds
      */
-    private Time\InMicroseconds $addition;
+    private Time\InMicroseconds $increment;
 
     /**
      * @param Time\InMicroseconds $time
      * @param float $factor
-     * @param Time\InMicroseconds $addition
+     * @param Time\InMicroseconds $increment
      */
-    public function __construct(Time\InMicroseconds $time, float $factor = 1., Time\InMicroseconds $addition = null)
+    public function __construct(Time\InMicroseconds $time, float $factor = 1., Time\InMicroseconds $increment = null)
     {
         parent::__construct($time);
 
         $this->factor = $factor;
-        $this->addition = $addition ?? new Time\Microsecond(0);
+        $this->increment = $increment ?? new Time\Microsecond(0);
     }
 
     /**
@@ -40,7 +39,7 @@ final class Linear extends VariableDelay
      */
     protected function vary(): void
     {
-        $amount = $this->time->microseconds() * $this->factor + $this->addition->microseconds();
+        $amount = $this->time->microseconds() * $this->factor + $this->increment->microseconds();
 
         $this->time = new Time\Microsecond($amount);
     }

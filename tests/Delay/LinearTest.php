@@ -14,17 +14,17 @@ final class LinearTest extends TestCase
     /**
      * @param Time\InMicroseconds $time
      * @param float $factor
-     * @param Time\InMicroseconds $addition
+     * @param Time\InMicroseconds $increment
      * @param int[] $expected
      * @dataProvider data
      */
     public function testMicroseconds(
         Time\InMicroseconds $time,
         float $factor,
-        Time\InMicroseconds $addition,
+        Time\InMicroseconds $increment,
         array $expected
     ): void {
-        $delay = new Delay\Linear($time, $factor, $addition);
+        $delay = new Delay\Linear($time, $factor, $increment);
 
         foreach ($expected as $microseconds) {
             $this->assertEquals($microseconds, $delay->microseconds());
