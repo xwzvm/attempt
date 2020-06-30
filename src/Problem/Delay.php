@@ -28,7 +28,7 @@ final class Delay implements Resolver
     {
         $this->interrupt = $interrupt;
 
-        $this->next = $next ?? new Blank();
+        $this->next = $next ?? new Tail();
     }
 
     /**

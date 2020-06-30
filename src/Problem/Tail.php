@@ -5,10 +5,12 @@ namespace Xwzvm\Attempt\Problem;
 use Throwable;
 
 /**
+ * End of problem resolver chain.
+ *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  * @codeCoverageIgnore
  */
-final class Blank implements Resolver
+final class Tail implements Resolver
 {
     /**
      * @inheritDoc

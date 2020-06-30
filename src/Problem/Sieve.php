@@ -35,7 +35,7 @@ final class Sieve implements Resolver
         }
 
         $this->problems = $acceptable;
-        $this->next = new Blank();
+        $this->next = new Tail();
     }
 
     /**
