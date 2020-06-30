@@ -3,7 +3,7 @@
 namespace Xwzvm\Attempt\Interrupt;
 
 /**
- * Interface for built-in sleep functions wrapping.
+ * Must be implemented by classes that wraps built-in sleep functions.
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
