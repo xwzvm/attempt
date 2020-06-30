@@ -15,10 +15,4 @@ interface Resolver
      * @param Throwable $problem
      */
     public function pass(Throwable $problem): void;
-
-    /**
-     * @param Resolver $next
-     * @return Resolver
-     */
-    public function before(Resolver $next): Resolver;
 }

@@ -8,7 +8,7 @@ use Xwzvm\Attempt\Interrupt\Interrupt;
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Delay implements Resolver
+final class Delay implements ChainableResolver
 {
     /**
      * @var Interrupt

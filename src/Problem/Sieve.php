@@ -10,7 +10,7 @@ use Throwable;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Sieve implements Resolver
+final class Sieve implements ChainableResolver
 {
     /**
      * @var class-string<\Throwable>[]

@@ -18,12 +18,4 @@ final class Tail implements Resolver
     public function pass(Throwable $problem): void
     {
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function before(Resolver $next): Resolver
-    {
-        return $next;
-    }
 }
