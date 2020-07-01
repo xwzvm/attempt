@@ -3,6 +3,8 @@
 namespace Tamer\Time;
 
 /**
+ * Current time.
+ *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
 final class Now implements InMicroseconds

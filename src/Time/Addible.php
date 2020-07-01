@@ -3,6 +3,8 @@
 namespace Tamer\Time;
 
 /**
+ * Must be implemented by time classes that can be summarized.
+ *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
 interface Addible
