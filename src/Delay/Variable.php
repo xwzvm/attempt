@@ -9,7 +9,7 @@ use Tamer\Time;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-abstract class VariableDelay implements Time\InMicroseconds
+abstract class Variable implements Time\InMicroseconds
 {
     /**
      * @var Time\InMicroseconds

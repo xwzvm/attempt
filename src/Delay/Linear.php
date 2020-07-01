@@ -9,7 +9,7 @@ use Tamer\Time;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Linear extends VariableDelay
+final class Linear extends Variable
 {
     /**
      * @var float
