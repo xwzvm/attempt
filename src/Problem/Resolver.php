@@ -13,6 +13,7 @@ interface Resolver
 {
     /**
      * @param Throwable $problem
+     * @throws Throwable
      */
     public function pass(Throwable $problem): void;
 }
