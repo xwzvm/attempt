@@ -7,7 +7,7 @@ namespace Tamer\Delay\Time;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-abstract class Unit implements InMicroseconds
+abstract class Unit implements InMicroseconds, Addible
 {
     /**
      * @var float
@@ -35,5 +35,13 @@ abstract class Unit implements InMicroseconds
     final public function microseconds(): float
     {
         return $this->amount * $this->factor();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    final public function add(InMicroseconds $time): InMicroseconds
+    {
+        return new static(static::microseconds() + $time->microseconds());
     }
 }
