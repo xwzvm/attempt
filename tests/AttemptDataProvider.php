@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test;
+namespace Tamer\Test;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test\Problem;
+namespace Tamer\Test\Problem;
 
 use PHPUnit\Framework\TestCase;
-use Xwzvm\Attempt\Problem\ChainableResolver;
-use Xwzvm\Attempt\Problem\ResolverChain;
+use Tamer\Problem\ChainableResolver;
+use Tamer\Problem\ResolverChain;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

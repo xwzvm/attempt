@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Problem;
+namespace Tamer\Problem;
 
 /**
  * Must be implemented by chainable resolvers.

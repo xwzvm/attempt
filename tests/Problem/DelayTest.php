@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test\Problem;
+namespace Tamer\Test\Problem;
 
 use PHPUnit\Framework\TestCase;
 use Throwable;
-use Xwzvm\Attempt\Interrupt\Interrupt;
-use Xwzvm\Attempt\Problem;
+use Tamer\Interrupt\Interrupt;
+use Tamer\Problem;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

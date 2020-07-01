@@ -1,6 +1,6 @@
 {
-    "name": "xwzvm/attempt",
-    "description": "Helps to make several attempts to invoke an unstable callable.",
+    "name": "xwzvm/tamer",
+    "description": "Helps to handle an unstable callable.",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -18,9 +18,9 @@
         "phpstan/phpstan-strict-rules": "^0.12.2"
     },
     "autoload": {
-        "psr-4": { "Xwzvm\\Attempt\\": "src/" }
+        "psr-4": { "Tamer\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "Xwzvm\\Attempt\\Test\\": "tests/" }
+        "psr-4": { "Tamer\\Test\\": "tests/" }
     }
 }

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Delay;
+namespace Tamer\Delay;
 
 /**
  * Base class for non-constant delays.

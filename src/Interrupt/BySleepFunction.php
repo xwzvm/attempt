@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Interrupt;
+namespace Tamer\Interrupt;
 
-use Xwzvm\Attempt\Delay\Time;
+use Tamer\Delay\Time;
 
 /**
  * Doesn't delay for less than 1 or more than PHP_INT_MAX microseconds.

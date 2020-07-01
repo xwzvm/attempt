@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Problem;
+namespace Tamer\Problem;
 
 use Throwable;
-use Xwzvm\Attempt\Interrupt\Interrupt;
+use Tamer\Interrupt\Interrupt;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

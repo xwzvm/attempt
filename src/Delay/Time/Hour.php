@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Delay\Time;
+namespace Tamer\Delay\Time;
 
 /**
  * Represents time in hours.
