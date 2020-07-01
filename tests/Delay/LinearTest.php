@@ -4,7 +4,7 @@ namespace Tamer\Test\Delay;
 
 use PHPUnit\Framework\TestCase;
 use Tamer\Delay;
-use Tamer\Delay\Time;
+use Tamer\Time;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

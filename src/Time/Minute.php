@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace Tamer\Delay\Time;
+namespace Tamer\Time;
 
 /**
- * Represents time in seconds.
+ * Represents time in minutes.
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Second extends Unit
+final class Minute extends Unit
 {
     /**
      * @inheritDoc
      */
     protected function factor(): int
     {
-        return 1_000_000;
+        return 60_000_000;
     }
 }

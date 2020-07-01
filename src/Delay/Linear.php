@@ -2,7 +2,7 @@
 
 namespace Tamer\Delay;
 
-use Tamer\Delay\Time;
+use Tamer\Time;
 
 /**
  * Represents linearly varying delay.

@@ -2,7 +2,7 @@
 
 namespace Tamer\Interrupt;
 
-use Tamer\Delay\Time;
+use Tamer\Time;
 
 /**
  * Doesn't delay for less than 1 or more than PHP_INT_MAX microseconds.

@@ -3,7 +3,7 @@
 namespace Tamer\Test\Interrupt;
 
 use PHPUnit\Framework\TestCase;
-use Tamer\Delay\Time;
+use Tamer\Time;
 use Tamer\Interrupt;
 
 /**

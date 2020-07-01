@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tamer\Delay\Time;
+namespace Tamer\Time;
 
 /**
  * Must be implemented by classes that represent a time unit or an attempt delay.

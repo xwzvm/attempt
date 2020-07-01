@@ -2,6 +2,8 @@
 
 namespace Tamer\Delay;
 
+use Tamer\Time;
+
 /**
  * Base class for non-constant delays.
  *

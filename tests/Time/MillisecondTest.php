@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Tamer\Test\Delay\Time;
+namespace Tamer\Test\Time;
 
 use PHPUnit\Framework\TestCase;
-use Tamer\Delay\Time\Minute;
+use Tamer\Time\Millisecond;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class MinuteTest extends TestCase
+final class MillisecondTest extends TestCase
 {
-    private const MICROSECONDS_PER_MINUTE = 60_000_000;
+    private const MICROSECONDS_PER_MILLISECOND = 1000;
 
     /**
      * @param float $amount
@@ -19,9 +19,9 @@ final class MinuteTest extends TestCase
      */
     public function testMicroseconds(float $amount, float $expected): void
     {
-        $minutes = new Minute($amount);
+        $milliseconds = new Millisecond($amount);
 
-        $this->assertEquals($expected, $minutes->microseconds());
+        $this->assertEquals($expected, $milliseconds->microseconds());
     }
 
     /**
@@ -33,7 +33,7 @@ final class MinuteTest extends TestCase
 
         for ($i = 0; $i < 3; ++$i) {
             $amount = (float) mt_rand(0, 100);
-            $data[] = [$amount, $amount * self::MICROSECONDS_PER_MINUTE];
+            $data[] = [$amount, $amount * self::MICROSECONDS_PER_MILLISECOND];
         }
 
         return $data;

@@ -114,9 +114,9 @@ final class Pipeline
     public function delayingFor(float $seconds, float $factor = 1., float $increment = 0.): self
     {
         $time = new Delay\Linear(
-            new Delay\Time\Second($seconds),
+            new Time\Second($seconds),
             $factor,
-            new Delay\Time\Second($increment)
+            new Time\Second($increment)
         );
 
         $interrupt = new Interrupt\BySleepFunction($time, new Interrupt\Usleep());

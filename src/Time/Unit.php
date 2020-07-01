@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tamer\Delay\Time;
+namespace Tamer\Time;
 
 /**
  * Base class for time units.
