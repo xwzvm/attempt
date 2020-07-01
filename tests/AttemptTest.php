@@ -11,12 +11,14 @@ use Xwzvm\Attempt\Problem;
  */
 final class AttemptTest extends TestCase
 {
+    use AttemptDataProvider;
+
     /**
      * @param callable $action
      * @param int $bound
      * @param mixed[] $arguments
      * @param int $expected
-     * @dataProvider data
+     * @dataProvider actions
      */
     public function testInvoke(callable $action, int $bound, array $arguments, int $expected): void
     {
@@ -34,7 +36,7 @@ final class AttemptTest extends TestCase
      * @param callable $action
      * @param int $bound
      * @param mixed[] $arguments
-     * @dataProvider data
+     * @dataProvider actions
      */
     public function testNotEnoughAttempts(callable $action, int $bound, array $arguments): void
     {
@@ -63,21 +65,18 @@ final class AttemptTest extends TestCase
 
         $attempt = new Attempt($resolver);
 
-        $dummy = function (): void {
-        };
-
-        $attempt($dummy, 0);
+        $attempt(fn () => 42, 0);
     }
 
     /**
      * @param callable $action
      * @param int $times
-     * @param class-string<\Throwable> $expected
+     * @param class-string<\Throwable> $problem
      * @dataProvider problems
      */
-    public function testLastProblemWasThrown(callable $action, int $times, string $expected): void
+    public function testLastProblemWasThrown(callable $action, int $times, string $problem): void
     {
-        $this->expectException($expected);
+        $this->expectException($problem);
 
         $resolver = $this->createMock(Problem\Resolver::class);
         $resolver->expects($this->exactly($times))->method('pass');
@@ -85,58 +84,5 @@ final class AttemptTest extends TestCase
         $attempt = new Attempt($resolver);
 
         $attempt($action, $times)();
-    }
-
-    /**
-     * @return array[]
-     */
-    public function data(): array
-    {
-        $data = [];
-
-        for ($i = 0; $i < 3; ++$i) {
-            $bound = mt_rand(2, 10);
-            $argument = mt_rand(0, 100);
-
-            $square = function (int $x) use ($bound): int {
-                static $count = 0;
-
-                if ($count++ < $bound) {
-                    throw new \RuntimeException();
-                }
-
-                return $x * $x;
-            };
-
-            $data[] = [$square, $bound, [$argument], $argument * $argument];
-        }
-
-        return $data;
-    }
-
-    /**
-     * @return array[]
-     */
-    public function problems(): array
-    {
-        $data = [];
-
-        for ($i = 0; $i < 3; ++$i) {
-            $times = mt_rand(1, 10);
-
-            $square = function (): void {
-                static $count = 0;
-
-                if ($count++ % 2 === 0) {
-                    throw new \RuntimeException();
-                }
-
-                throw new \LogicException();
-            };
-
-            $data[] = [$square, $times, $times % 2 === 0 ? \LogicException::class : \RuntimeException::class];
-        }
-
-        return $data;
     }
 }
