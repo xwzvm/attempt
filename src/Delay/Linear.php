@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Delay;
+namespace Tamer\Delay;
 
-use Xwzvm\Attempt\Delay\Time;
+use Tamer\Delay\Time;
 
 /**
  * Represents linearly varying delay.

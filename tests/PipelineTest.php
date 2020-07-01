@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test;
+namespace Tamer\Test;
 
 use PHPUnit\Framework\TestCase;
-use Xwzvm\Attempt;
+use Tamer\Pipeline as Attempt;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
@@ -27,7 +27,7 @@ final class PipelineTest extends TestCase
         int $expected,
         string $problem
     ): void {
-        $try = new Attempt\Pipeline();
+        $try = new Attempt();
 
         $result = $try($action)
             ->until($bound + 1)
@@ -52,7 +52,7 @@ final class PipelineTest extends TestCase
         int $expected,
         string $problem
     ): void {
-        $try = new Attempt\Pipeline();
+        $try = new Attempt();
 
         $result = $try($action)
             ->untilSucceeded()
@@ -72,7 +72,7 @@ final class PipelineTest extends TestCase
     {
         $this->expectException($problem);
 
-        $try = new Attempt\Pipeline();
+        $try = new Attempt();
 
         $try($action)->until($times)->with();
     }
@@ -94,7 +94,7 @@ final class PipelineTest extends TestCase
     ): void {
         $this->expectException($problem);
 
-        $try = new Attempt\Pipeline();
+        $try = new Attempt();
 
         $try($action)
             ->until(mt_rand(1, $bound - 1))
@@ -110,7 +110,7 @@ final class PipelineTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument $times must be at least 1.');
 
-        $try = new Attempt\Pipeline();
+        $try = new Attempt();
 
         $try(fn () => 42)->until(0)->with();
     }

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt;
+namespace Tamer;
 
 use InvalidArgumentException;
 use Throwable;
-use Xwzvm\Attempt\Problem;
+use Tamer\Problem;
 
 /**
  * Wraps a callable.

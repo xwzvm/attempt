@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test\Delay;
+namespace Tamer\Test\Delay;
 
 use PHPUnit\Framework\TestCase;
-use Xwzvm\Attempt\Delay;
-use Xwzvm\Attempt\Delay\Time;
+use Tamer\Delay;
+use Tamer\Delay\Time;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

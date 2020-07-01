@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test\Interrupt;
+namespace Tamer\Test\Interrupt;
 
 use PHPUnit\Framework\TestCase;
-use Xwzvm\Attempt\Delay\Time;
-use Xwzvm\Attempt\Interrupt;
+use Tamer\Delay\Time;
+use Tamer\Interrupt;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

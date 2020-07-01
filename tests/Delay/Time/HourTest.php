@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test\Delay\Time;
+namespace Tamer\Test\Delay\Time;
 
 use PHPUnit\Framework\TestCase;
-use Xwzvm\Attempt\Delay\Time\Hour;
+use Tamer\Delay\Time\Hour;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

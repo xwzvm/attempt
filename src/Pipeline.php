@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt;
+namespace Tamer;
 
 use Closure;
 use InvalidArgumentException;
-use Xwzvm\Attempt\Problem\ResolverChain;
+use Tamer\Problem\ResolverChain;
 
 /**
  * Hides the boilerplate by providing pipeline API.

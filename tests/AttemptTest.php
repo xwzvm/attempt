@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Test;
+namespace Tamer\Test;
 
 use PHPUnit\Framework\TestCase;
-use Xwzvm\Attempt\Attempt;
-use Xwzvm\Attempt\Problem;
+use Tamer\Attempt;
+use Tamer\Problem;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>

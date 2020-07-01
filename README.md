@@ -1,12 +1,12 @@
-# Attempt
+# Tamer
 
-[![Latest Stable Version](https://poser.pugx.org/xwzvm/attempt/v)](//packagist.org/packages/xwzvm/attempt)
-[![Build Status](https://travis-ci.com/xwzvm/attempt.svg?branch=master)](https://travis-ci.com/xwzvm/attempt)
-[![Coverage Status](https://coveralls.io/repos/github/xwzvm/attempt/badge.svg?branch=master)](https://coveralls.io/github/xwzvm/attempt?branch=master)
-[![License](https://poser.pugx.org/xwzvm/attempt/license)](//packagist.org/packages/xwzvm/attempt)
-[![Total Downloads](https://poser.pugx.org/xwzvm/attempt/downloads)](//packagist.org/packages/xwzvm/attempt)
+[![Latest Stable Version](https://poser.pugx.org/xwzvm/tamer/v)](//packagist.org/packages/xwzvm/tamer)
+[![Build Status](https://travis-ci.com/xwzvm/tamer.svg?branch=master)](https://travis-ci.com/xwzvm/tamer)
+[![Coverage Status](https://coveralls.io/repos/github/xwzvm/tamer/badge.svg?branch=master)](https://coveralls.io/github/xwzvm/tamer?branch=master)
+[![License](https://poser.pugx.org/xwzvm/tamer/license)](//packagist.org/packages/xwzvm/tamer)
+[![Total Downloads](https://poser.pugx.org/xwzvm/tamer/downloads)](//packagist.org/packages/xwzvm/tamer)
 
-**Attempt** is a flexible PHP library that makes repeated invocation of unstable callable less painful.
+**Tamer** is a flexible PHP library that makes repeated invocation of unstable callable less painful.
 
 ## Requirements
 * PHP 7.4+
@@ -15,16 +15,16 @@
 ## Installation
 
 ```
-composer require xwzvm/attempt
+composer require xwzvm/tamer
 ```
 
 ## Usage
 
 ```php
-use Xwzvm\Attempt\Attempt;
-use Xwzvm\Attempt\Delay\Time;
-use Xwzvm\Attempt\Interrupt;
-use Xwzvm\Attempt\Problem;
+use Tamer\Attempt;
+use Tamer\Delay\Time;
+use Tamer\Interrupt;
+use Tamer\Problem;
 
 // Acceptable \Throwable. May take several class-strings.
 $sieve = new Problem\Sieve(\Throwable::class);  

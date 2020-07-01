@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Xwzvm\Attempt\Interrupt;
+namespace Tamer\Interrupt;
 
 /**
  * Usleep wrapper.
