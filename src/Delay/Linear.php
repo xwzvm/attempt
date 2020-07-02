@@ -24,7 +24,7 @@ final class Linear extends Variable
     /**
      * @param Time\InMicroseconds $time
      * @param float $factor
-     * @param Time\InMicroseconds $increment
+     * @param Time\InMicroseconds|null $increment
      */
     public function __construct(Time\InMicroseconds $time, float $factor = 1., Time\InMicroseconds $increment = null)
     {
