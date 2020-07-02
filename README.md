@@ -22,7 +22,7 @@ composer require xwzvm/tamer
 
 ```php
 use Tamer\Attempt;
-use Tamer\Delay\Time;
+use Tamer\Time;
 use Tamer\Interrupt;
 use Tamer\Problem;
 
