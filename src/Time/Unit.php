@@ -42,6 +42,6 @@ abstract class Unit implements InMicroseconds, Addible
      */
     final public function add(InMicroseconds $time): InMicroseconds
     {
-        return new static(static::microseconds() + $time->microseconds());
+        return new Microsecond(static::microseconds() + $time->microseconds());
     }
 }
