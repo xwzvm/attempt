@@ -2,40 +2,26 @@
 
 namespace Tamer\Test\Time;
 
-use PHPUnit\Framework\TestCase;
-use Tamer\Time\Second;
+use Tamer\Time;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class SecondTest extends TestCase
+final class SecondTest extends TimeUnitTest
 {
-    private const MICROSECONDS_PER_SECOND = 1_000_000;
-
     /**
-     * @param float $amount
-     * @param float $expected
-     * @dataProvider data
+     * @inheritDoc
      */
-    public function testMicroseconds(float $amount, float $expected): void
+    protected function unit(float $amount): Time\Unit
     {
-        $seconds = new Second($amount);
-
-        $this->assertEquals($expected, $seconds->microseconds());
+        return new Time\Second($amount);
     }
 
     /**
-     * @return array[]
+     * @inheritDoc
      */
-    public function data(): array
+    protected function factor(): int
     {
-        $data = [];
-
-        for ($i = 0; $i < 3; ++$i) {
-            $amount = (float) mt_rand(0, 100);
-            $data[] = [$amount, $amount * self::MICROSECONDS_PER_SECOND];
-        }
-
-        return $data;
+        return 1_000_000;
     }
 }
