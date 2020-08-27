@@ -1,9 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Tamer\Test\Delay;
+namespace Tamer\Test\Time\Delay;
 
 use PHPUnit\Framework\TestCase;
-use Tamer\Delay;
 use Tamer\Time;
 
 /**
@@ -24,7 +23,7 @@ final class LinearTest extends TestCase
         Time\InMicroseconds $increment,
         array $expected
     ): void {
-        $delay = new Delay\Linear($time, $factor, $increment);
+        $delay = new Time\Delay\Linear($time, $factor, $increment);
 
         foreach ($expected as $microseconds) {
             $this->assertEquals($microseconds, $delay->microseconds());

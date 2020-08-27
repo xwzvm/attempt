@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tamer\Delay;
+namespace Tamer\Time\Delay;
 
 use Tamer\Time;
 
