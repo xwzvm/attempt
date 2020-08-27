@@ -2,6 +2,8 @@
 
 namespace Tamer\Interrupt;
 
+use Tamer\Time;
+
 /**
  * Must be implemented by classes that pause between attempts.
  *
@@ -10,7 +12,9 @@ namespace Tamer\Interrupt;
 interface Interrupt
 {
     /**
-     * @return void
+     * Interrupts execution.
+     *
+     * @param Time\InMicroseconds $time
      */
-    public function halt(): void;
+    public function for(Time\InMicroseconds $time): void;
 }

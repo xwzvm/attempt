@@ -9,13 +9,13 @@ use Tamer\Interrupt;
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class BySleepFunctionTest extends TestCase
+final class UsleepTest extends TestCase
 {
     /**
      * @param float $microseconds
      * @dataProvider microseconds
      */
-    public function testHalt(float $microseconds): void
+    public function testFor(float $microseconds): void
     {
         $delay = $this->createMock(Time\InMicroseconds::class);
         $delay
@@ -23,15 +23,13 @@ final class BySleepFunctionTest extends TestCase
             ->method('microseconds')
             ->willReturn($microseconds);
 
-        $sleep = $this->createMock(Interrupt\SleepFunction::class);
-        $sleep
-            ->expects($this->exactly(intval($microseconds > 0. && $microseconds < PHP_INT_MAX)))
-            ->method('execute')
-            ->with(intval($microseconds));
+        $usleep = function (int $microseconds) {
+            // I'm an usleep mock.
+        };
 
-        $interrupt = new Interrupt\BySleepFunction($delay, $sleep);
+        $interrupt = new Interrupt\Usleep($usleep);
 
-        $interrupt->halt();
+        $interrupt->for($delay);
     }
 
     /**
