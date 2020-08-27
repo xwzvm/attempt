@@ -7,7 +7,7 @@ namespace Tamer\Time;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-interface Addible
+interface Addable
 {
     /**
      * @param InMicroseconds $time

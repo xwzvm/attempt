@@ -7,7 +7,7 @@ namespace Tamer\Time;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-abstract class Unit implements InMicroseconds, Addible
+abstract class Unit implements InMicroseconds, Addable
 {
     /**
      * @var float
