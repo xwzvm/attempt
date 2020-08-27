@@ -10,7 +10,7 @@ namespace Tamer\Time;
 final class Second extends Unit
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function factor(): int
     {

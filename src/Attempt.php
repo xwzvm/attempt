@@ -27,7 +27,7 @@ final class Attempt implements Repeater
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __invoke(callable $action, float $times): callable
     {

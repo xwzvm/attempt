@@ -30,7 +30,7 @@ abstract class Variable implements Time\InMicroseconds
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     final public function microseconds(): float
     {

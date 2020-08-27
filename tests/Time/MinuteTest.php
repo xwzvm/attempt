@@ -10,7 +10,7 @@ use Tamer\Time;
 final class MinuteTest extends TimeUnitTest
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function unit(float $amount): Time\Unit
     {
@@ -18,7 +18,7 @@ final class MinuteTest extends TimeUnitTest
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function factor(): int
     {

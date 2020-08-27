@@ -35,7 +35,7 @@ final class Linear extends Variable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     protected function vary(): void
     {

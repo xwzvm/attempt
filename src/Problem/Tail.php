@@ -13,7 +13,7 @@ use Throwable;
 final class Tail implements Resolver
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function pass(Throwable $problem): void
     {

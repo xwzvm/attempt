@@ -30,7 +30,7 @@ abstract class Unit implements InMicroseconds, Addible
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     final public function microseconds(): float
     {
@@ -38,7 +38,7 @@ abstract class Unit implements InMicroseconds, Addible
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     final public function add(InMicroseconds $time): InMicroseconds
     {

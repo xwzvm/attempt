@@ -32,7 +32,7 @@ final class BySleepFunction implements Interrupt
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function halt(): void
     {

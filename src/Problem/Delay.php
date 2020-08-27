@@ -32,7 +32,7 @@ final class Delay implements ChainableResolver
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function pass(Throwable $problem): void
     {
@@ -42,7 +42,7 @@ final class Delay implements ChainableResolver
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function before(Resolver $next): Resolver
     {

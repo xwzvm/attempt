@@ -10,7 +10,7 @@ namespace Tamer\Time;
 final class Now implements InMicroseconds
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function microseconds(): float
     {

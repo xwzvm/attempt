@@ -39,7 +39,7 @@ final class Sieve implements ChainableResolver
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      * @throws Throwable
      */
     public function pass(Throwable $problem): void
@@ -55,7 +55,7 @@ final class Sieve implements ChainableResolver
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function before(Resolver $next): Resolver
     {

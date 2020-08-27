@@ -29,7 +29,7 @@ final class ResolverChain implements Resolver
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function pass(Throwable $problem): void
     {
