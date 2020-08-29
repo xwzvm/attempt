@@ -22,10 +22,10 @@ final class AttemptTest extends TestCase
      */
     public function testInvoke(callable $action, int $bound, array $arguments, int $expected): void
     {
-        $resolver = $this->createMock(Problem\Resolver::class);
-        $resolver->expects($this->exactly($bound))->method('pass');
+        $capture = $this->createMock(Problem\Capture::class);
+        $capture->expects($this->exactly($bound))->method('take');
 
-        $attempt = new Attempt($resolver);
+        $attempt = new Attempt($capture);
 
         $result = $attempt($action, $bound + 1)(...$arguments);
 
@@ -44,10 +44,10 @@ final class AttemptTest extends TestCase
 
         $times = mt_rand(1, $bound - 1);
 
-        $resolver = $this->createMock(Problem\Resolver::class);
-        $resolver->expects($this->exactly($times))->method('pass');
+        $capture = $this->createMock(Problem\Capture::class);
+        $capture->expects($this->exactly($times))->method('take');
 
-        $attempt = new Attempt($resolver);
+        $attempt = new Attempt($capture);
 
         $attempt($action, $times)(...$arguments);
     }
@@ -60,10 +60,10 @@ final class AttemptTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument $times must be at least 1.');
 
-        $resolver = $this->createMock(Problem\Resolver::class);
-        $resolver->expects($this->never())->method('pass');
+        $capture = $this->createMock(Problem\Capture::class);
+        $capture->expects($this->never())->method('take');
 
-        $attempt = new Attempt($resolver);
+        $attempt = new Attempt($capture);
 
         $attempt(fn () => 42, 0);
     }
@@ -78,10 +78,10 @@ final class AttemptTest extends TestCase
     {
         $this->expectException($problem);
 
-        $resolver = $this->createMock(Problem\Resolver::class);
-        $resolver->expects($this->exactly($times))->method('pass');
+        $capture = $this->createMock(Problem\Capture::class);
+        $capture->expects($this->exactly($times))->method('take');
 
-        $attempt = new Attempt($resolver);
+        $attempt = new Attempt($capture);
 
         $attempt($action, $times)();
     }

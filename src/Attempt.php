@@ -14,16 +14,16 @@ use Tamer\Problem;
 final class Attempt implements Repeater
 {
     /**
-     * @var Problem\Resolver
+     * @var Problem\Capture
      */
-    private Problem\Resolver $resolver;
+    private Problem\Capture $capture;
 
     /**
-     * @param Problem\Resolver $resolver
+     * @param Problem\Capture $capture
      */
-    public function __construct(Problem\Resolver $resolver)
+    public function __construct(Problem\Capture $capture)
     {
-        $this->resolver = $resolver;
+        $this->capture = $capture;
     }
 
     /**
@@ -42,7 +42,7 @@ final class Attempt implements Repeater
                 try {
                     return call_user_func_array($action, $arguments);
                 } catch (Throwable $problem) {
-                    $this->resolver->pass($problem);
+                    $this->capture->take($problem);
                 }
             } while (--$times > 0);
 
