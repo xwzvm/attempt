@@ -3,6 +3,7 @@
 namespace Tamer\Test\Problem;
 
 use PHPUnit\Framework\TestCase;
+use Tamer\Time;
 use Throwable;
 use Tamer\Interrupt\Interrupt;
 use Tamer\Problem;
@@ -10,25 +11,32 @@ use Tamer\Problem;
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class DelayTest extends TestCase
+final class WaitTest extends TestCase
 {
     /**
      * @param Throwable $problem
+     * @throws Throwable
      * @dataProvider problems
      */
     public function testPass(Throwable $problem): void
     {
+        $microseconds = $this->createMock(Time\InMicroseconds::class);
+        $microseconds->method('microseconds')->willReturn(1000.);
+
         $interrupt = $this->createMock(Interrupt::class);
-        $interrupt->expects($this->once())->method('halt');
+        $interrupt
+            ->expects($this->once())
+            ->method('for')
+            ->with($microseconds);
 
-        $next = $this->createMock(Problem\Resolver::class);
-        $next->expects($this->once())->method('pass')->with($problem);
+        $next = $this->createMock(Problem\ChainCapture::class);
+        $next->expects($this->once())->method('take')->with($problem);
 
-        $delay = new Problem\Delay($interrupt);
+        $wait = new Problem\Wait($interrupt, $microseconds);
 
-        $this->assertEquals($next, $delay->before($next));
+        $this->assertEquals($next, $wait->before($next));
 
-        $delay->pass($problem);
+        $wait->take($problem);
     }
 
     /**

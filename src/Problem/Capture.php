@@ -5,15 +5,15 @@ namespace Tamer\Problem;
 use Throwable;
 
 /**
- * Must be implemented by classes that resolve a \Throwable that occurred during the attempt.
+ * Must be implemented by problem handlers.
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-interface Resolver
+interface Capture
 {
     /**
      * @param Throwable $problem
      * @throws Throwable
      */
-    public function pass(Throwable $problem): void;
+    public function take(Throwable $problem): void;
 }

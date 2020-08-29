@@ -9,7 +9,7 @@ use Tamer\Problem;
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class SieveTest extends TestCase
+final class FilterTest extends TestCase
 {
     /**
      * @param class-string<\Throwable>[] $acceptable
@@ -20,15 +20,15 @@ final class SieveTest extends TestCase
      */
     public function testPass(array $acceptable, Throwable $problem, bool $ok): void
     {
-        $sieve = new Problem\Sieve(...$acceptable);
+        $filter = new Problem\Filter(...$acceptable);
 
-        $next = $this->createMock(Problem\Resolver::class);
-        $next->expects($this->exactly((int) $ok))->method('pass')->with($problem);
+        $next = $this->createMock(Problem\ChainCapture::class);
+        $next->expects($this->exactly((int) $ok))->method('take')->with($problem);
 
-        $this->assertEquals($next, $sieve->before($next));
+        $this->assertEquals($next, $filter->before($next));
 
         try {
-            $sieve->pass($problem);
+            $filter->take($problem);
             $this->assertTrue($ok);
         } catch (\Throwable $exception) {
             $this->assertFalse($ok);
@@ -44,7 +44,7 @@ final class SieveTest extends TestCase
         $this->expectExceptionMessage('InvalidException must implement ' . Throwable::class . '.');
 
         /** @phpstan-ignore-next-line */
-        new Problem\Sieve(\RuntimeException::class, 'InvalidException', \LogicException::class);
+        new Problem\Filter(\RuntimeException::class, 'InvalidException', \LogicException::class);
     }
 
     /**

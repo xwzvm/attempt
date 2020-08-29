@@ -10,7 +10,7 @@ use Throwable;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Sieve implements ChainableResolver
+final class Filter extends AbstractCapture
 {
     /**
      * @var class-string<\Throwable>[]
@@ -18,16 +18,13 @@ final class Sieve implements ChainableResolver
     private array $problems;
 
     /**
-     * @var Resolver
-     */
-    private Resolver $next;
-
-    /**
      * @param class-string<\Throwable> ...$acceptable
      * @throws InvalidArgumentException if $acceptable contains not \Throwable.
      */
     public function __construct(string ...$acceptable)
     {
+        parent::__construct();
+
         foreach ($acceptable as $problem) {
             if (!is_a($problem, Throwable::class, true)) {
                 throw new InvalidArgumentException($problem . ' must implement ' . Throwable::class . '.');
@@ -35,30 +32,19 @@ final class Sieve implements ChainableResolver
         }
 
         $this->problems = $acceptable;
-        $this->next = new Tail();
     }
 
     /**
      * {@inheritdoc}
-     * @throws Throwable
      */
-    public function pass(Throwable $problem): void
+    protected function process(Throwable $problem): void
     {
         foreach ($this->problems as $acceptable) {
             if (is_a($problem, $acceptable, true)) {
-                $this->next->pass($problem);
                 return;
             }
         }
 
         throw $problem;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function before(Resolver $next): Resolver
-    {
-        return $this->next = $next;
     }
 }
