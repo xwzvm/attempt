@@ -71,11 +71,12 @@ final class AttemptTest extends TestCase
     /**
      * @param callable $action
      * @param int $times
-     * @param class-string<\Throwable> $problem
+     * @param string $problem
      * @dataProvider problems
      */
     public function testLastProblemWasThrown(callable $action, int $times, string $problem): void
     {
+        /** @psalm-var class-string<\Throwable> $problem */
         $this->expectException($problem);
 
         $capture = $this->createMock(Problem\Capture::class);

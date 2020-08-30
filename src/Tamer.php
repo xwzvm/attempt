@@ -4,14 +4,13 @@ namespace Tamer;
 
 use Closure;
 use InvalidArgumentException;
-use Tamer\Problem\ResolverChain;
 
 /**
- * Hides the boilerplate by providing pipeline API.
+ * Provides a fluent interface.
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Pipeline
+final class Tamer implements Fluency
 {
     /**
      * @var Closure
@@ -29,14 +28,14 @@ final class Pipeline
     private float $times;
 
     /**
-     * @var Problem\ChainableResolver
+     * @var Problem\Filter
      */
-    private Problem\ChainableResolver $sieve;
+    private Problem\Filter $filter;
 
     /**
-     * @var Problem\ChainableResolver
+     * @var Problem\Wait
      */
-    private Problem\ChainableResolver $delay;
+    private Problem\Wait $wait;
 
     /**
      * @return void
@@ -53,12 +52,11 @@ final class Pipeline
 
         $this->until(1);
         $this->retryingOn(\Throwable::class);
-        $this->delayingFor(0);
+        $this->waitingFor(0);
     }
 
     /**
-     * @param callable $action
-     * @return self
+     * {@inheritdoc}
      */
     public function __invoke(callable $action): self
     {
@@ -68,20 +66,17 @@ final class Pipeline
     }
 
     /**
-     * @param class-string<\Throwable> ...$problems
-     * @return self
+     * {@inheritdoc}
      */
     public function retryingOn(string ...$problems): self
     {
-        $this->sieve = new Problem\Sieve(...$problems);
+        $this->filter = new Problem\Filter(...$problems);
 
         return $this;
     }
 
     /**
-     * @param int $times
-     * @return self
-     * @throws InvalidArgumentException if $times < 1.
+     * {@inheritdoc}
      */
     public function until(int $times): self
     {
@@ -95,7 +90,7 @@ final class Pipeline
     }
 
     /**
-     * @return self
+     * {@inheritdoc}
      */
     public function untilSucceeded(): self
     {
@@ -105,36 +100,30 @@ final class Pipeline
     }
 
     /**
-     * @param float $seconds
-     * @param float $factor
-     * @param float $increment
-     * @return self
+     * {@inheritdoc}
      * @codeCoverageIgnore
      */
-    public function delayingFor(float $seconds, float $factor = 1., float $increment = 0.): self
+    public function waitingFor(float $seconds, float $factor = 1., float $increment = 0.): self
     {
-        $time = new Delay\Linear(
+        $time = new Time\Delay\Linear(
             new Time\Second($seconds),
             $factor,
             new Time\Second($increment)
         );
 
-        $interrupt = new Interrupt\BySleepFunction($time, new Interrupt\Usleep());
-
-        $this->delay = new Problem\Delay($interrupt);
+        $this->wait = new Problem\Wait(new Interrupt\Usleep(), $time);
 
         return $this;
     }
 
     /**
-     * @param mixed ...$arguments
-     * @return mixed
+     * {@inheritdoc}
      */
     public function with(...$arguments)
     {
-        $resolver = new ResolverChain($this->sieve, $this->delay);
+        $attempt = new Attempt($this->filter);
 
-        $attempt = new Attempt($resolver);
+        $this->filter->before($this->wait);
 
         return $attempt($this->action, $this->times)(...$arguments);
     }

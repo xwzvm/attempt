@@ -9,7 +9,7 @@ use InvalidArgumentException;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-interface Repeater
+interface Repeat
 {
     /**
      * @param callable $action Callable that may throw a \Throwable.

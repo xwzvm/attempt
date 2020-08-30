@@ -11,7 +11,7 @@ use Tamer\Problem;
  *
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class Attempt implements Repeater
+final class Attempt implements Repeat
 {
     /**
      * @var Problem\Capture

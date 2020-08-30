@@ -3,12 +3,13 @@
 namespace Tamer\Test;
 
 use PHPUnit\Framework\TestCase;
-use Tamer\Pipeline as Attempt;
+use Tamer\Tamer;
+use Throwable;
 
 /**
  * @author Sergei Malyshev <xwzvm@yandex.ru>
  */
-final class PipelineTest extends TestCase
+final class TamerTest extends TestCase
 {
     use AttemptDataProvider;
 
@@ -17,7 +18,8 @@ final class PipelineTest extends TestCase
      * @param int $bound
      * @param mixed[] $arguments
      * @param int $expected
-     * @param class-string<\Throwable> $problem
+     * @param string $problem
+     * @throws Throwable
      * @dataProvider actions
      */
     public function testInvoke(
@@ -27,7 +29,7 @@ final class PipelineTest extends TestCase
         int $expected,
         string $problem
     ): void {
-        $try = new Attempt();
+        $try = new Tamer();
 
         $result = $try($action)
             ->until($bound + 1)
@@ -42,8 +44,9 @@ final class PipelineTest extends TestCase
      * @param int $bound
      * @param mixed[] $arguments
      * @param int $expected
-     * @param class-string<\Throwable> $problem
+     * @param string $problem
      * @dataProvider actions
+     * @throws Throwable
      */
     public function testInvokeUntilSucceeded(
         callable $action,
@@ -52,7 +55,7 @@ final class PipelineTest extends TestCase
         int $expected,
         string $problem
     ): void {
-        $try = new Attempt();
+        $try = new Tamer();
 
         $result = $try($action)
             ->untilSucceeded()
@@ -65,14 +68,16 @@ final class PipelineTest extends TestCase
     /**
      * @param callable $action
      * @param int $times
-     * @param class-string<\Throwable> $problem
+     * @param string $problem
      * @dataProvider problems
+     * @throws Throwable
      */
     public function testLastProblemWasThrown(callable $action, int $times, string $problem): void
     {
+        /** @psalm-var class-string<\Throwable> $problem */
         $this->expectException($problem);
 
-        $try = new Attempt();
+        $try = new Tamer();
 
         $try($action)->until($times)->with();
     }
@@ -82,8 +87,9 @@ final class PipelineTest extends TestCase
      * @param int $bound
      * @param mixed[] $arguments
      * @param int $expected
-     * @param class-string<\Throwable> $problem
+     * @param string $problem
      * @dataProvider actions
+     * @throws Throwable
      */
     public function testNotEnoughAttempts(
         callable $action,
@@ -92,9 +98,10 @@ final class PipelineTest extends TestCase
         int $expected,
         string $problem
     ): void {
+        /** @psalm-var class-string<\Throwable> $problem */
         $this->expectException($problem);
 
-        $try = new Attempt();
+        $try = new Tamer();
 
         $try($action)
             ->until(mt_rand(1, $bound - 1))
@@ -104,13 +111,14 @@ final class PipelineTest extends TestCase
 
     /**
      * @return void
+     * @throws Throwable
      */
     public function testInvalidTimesNumber(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Argument $times must be at least 1.');
 
-        $try = new Attempt();
+        $try = new Tamer();
 
         $try(fn () => 42)->until(0)->with();
     }
