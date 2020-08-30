@@ -13,12 +13,12 @@ use Throwable;
 final class Filter extends AbstractCapture
 {
     /**
-     * @var class-string<\Throwable>[]
+     * @var string[]
      */
     private array $problems;
 
     /**
-     * @param class-string<\Throwable> ...$acceptable
+     * @param string ...$acceptable
      * @throws InvalidArgumentException if $acceptable contains not \Throwable.
      */
     public function __construct(string ...$acceptable)

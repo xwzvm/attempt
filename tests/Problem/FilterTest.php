@@ -12,7 +12,7 @@ use Tamer\Problem;
 final class FilterTest extends TestCase
 {
     /**
-     * @param class-string<\Throwable>[] $acceptable
+     * @param string[] $acceptable
      * @param Throwable $problem
      * @param bool $ok
      * @return void
@@ -43,7 +43,6 @@ final class FilterTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('InvalidException must implement ' . Throwable::class . '.');
 
-        /** @phpstan-ignore-next-line */
         new Problem\Filter(\RuntimeException::class, 'InvalidException', \LogicException::class);
     }
 
