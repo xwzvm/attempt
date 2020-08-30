@@ -2,7 +2,6 @@
 
 namespace Tamer\Problem;
 
-use Tamer\Exception\PropagationStop;
 use Throwable;
 
 /**
@@ -20,7 +19,6 @@ abstract class AbstractCapture implements ChainCapture
 
     /**
      * @param Throwable $problem
-     * @throws PropagationStop
      * @throws Throwable
      */
     abstract protected function process(Throwable $problem): void;
@@ -42,11 +40,7 @@ abstract class AbstractCapture implements ChainCapture
      */
     final public function take(Throwable $problem): void
     {
-        try {
-            $this->process($problem);
-        } catch (PropagationStop $exception) {
-            return;
-        }
+        $this->process($problem);
 
         $this->next->take($problem);
     }
