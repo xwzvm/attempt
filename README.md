@@ -13,13 +13,31 @@
 * [Composer](https://getcomposer.org/)
 
 ## Installation
-
 ```
 composer require xwzvm/tamer
 ```
 
 ## Usage
+### With fluent interface
+```php
+use Tamer\Tamer;
 
+$try = new Tamer();
+
+$naughty = function (int $a, int $b): int {
+    // A \Throwable may be thrown here.
+
+    return $a + $b;
+};
+
+$result = $try($naughty)
+    ->until(3)                              // Number of attempts.
+    ->retryingOn(\RuntimeException::class)  // Acceptable throwables.
+    ->waitingFor(0.25, 2)                   // Waiting between attempts duration in seconds, doubles after each attempt.
+    ->with(15, 27);                         // Invokes $naughty with passed arguments.
+```
+
+### With some boilerplate
 ```php
 use Tamer\Attempt;
 use Tamer\Time;
@@ -27,15 +45,15 @@ use Tamer\Interrupt;
 use Tamer\Problem;
 
 // Acceptable \Throwable. May take several class-strings.
-$sieve = new Problem\Sieve(\Throwable::class);  
+$filter = new Problem\Filter(\RuntimeException::class);
 
-// Constant delay between attempts.
-$delay = new Problem\Delay(new Interrupt\BySleepFunction(new Time\Second(5), new Interrupt\Usleep()));
+// Constant wait between attempts.
+$wait = new Problem\Wait(new Interrupt\Usleep(), new Time\Second(1));
 
 // \Throwable handling order.
-$sieve->before($delay);
+$filter->before($wait);
 
-$attempt = new Attempt($sieve);
+$attempt = new Attempt($filter);
 
 $naughty = function (int $a, int $b): int {
     // A \Throwable may be thrown here.
