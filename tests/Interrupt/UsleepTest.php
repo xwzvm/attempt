@@ -23,7 +23,7 @@ final class UsleepTest extends TestCase
             ->method('microseconds')
             ->willReturn($microseconds);
 
-        $usleep = function (int $microseconds) {
+        $usleep = function (int $microseconds): void {
             // I'm an usleep mock.
         };
 
