@@ -2,9 +2,9 @@
 
 namespace Tamer\Problem;
 
+use Tamer\Interrupt\Interrupt;
 use Tamer\Time;
 use Throwable;
-use Tamer\Interrupt\Interrupt;
 
 /**
  * Pauses between attempts.
