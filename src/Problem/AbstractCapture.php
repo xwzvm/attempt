@@ -25,7 +25,7 @@ abstract class AbstractCapture implements ChainCapture
 
     public function __construct()
     {
-        $this->next = new class implements Capture {
+        $this->next = new class() implements Capture {
             /**
              * {@inheritdoc}
              */
