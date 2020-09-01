@@ -4,7 +4,6 @@ namespace Tamer;
 
 use InvalidArgumentException;
 use Throwable;
-use Tamer\Problem;
 
 /**
  * Wraps a callable.
