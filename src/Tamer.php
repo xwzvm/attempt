@@ -18,11 +18,6 @@ final class Tamer implements Fluency
     private Closure $action;
 
     /**
-     * @var mixed[]
-     */
-    private array $arguments;
-
-    /**
      * @var float
      */
     private float $times;
@@ -47,8 +42,6 @@ final class Tamer implements Fluency
          */
         $this->action = function (): void {
         };
-
-        $this->arguments = [];
 
         $this->until(1);
         $this->retryingOn(\Throwable::class);
