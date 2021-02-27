@@ -18,7 +18,8 @@
         "phpstan/phpstan-strict-rules": "^0.12.2"
     },
     "autoload": {
-        "psr-4": { "Tamer\\": "src/" }
+        "psr-4": { "Tamer\\": "src/" },
+        "files": ["src/functions.php"]
     },
     "autoload-dev": {
         "psr-4": { "Tamer\\Test\\": "tests/" }

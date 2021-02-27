@@ -20,9 +20,7 @@ composer require xwzvm/tamer
 ## Usage
 ### With fluent interface
 ```php
-use Tamer\Tamer;
-
-$try = new Tamer();
+use function Tamer\attempt;
 
 $naughty = function (int $a, int $b): int {
     // A \Throwable may be thrown here.
@@ -30,7 +28,7 @@ $naughty = function (int $a, int $b): int {
     return $a + $b;
 };
 
-$result = $try($naughty)
+$result = attempt($naughty)
     ->until(3)                              // Number of attempts.
     ->retryingOn(\RuntimeException::class)  // Acceptable throwables.
     ->waitingFor(0.25, 2)                   // Waiting between attempts duration in seconds, doubles after each attempt.
